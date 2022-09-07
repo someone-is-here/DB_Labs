@@ -1,0 +1,16 @@
+Theme: Music application
+
+Minimal requirements:
+1) Authorization/Registration
+2) CRUD
+3) Roles (Admin, User, Musician)
+4) Journaling
+
+Table's list:
+--User - Singer(one-to-one)
+--Singer - Track(one-to-many)
+--Track
+--Album - Track(one-to-many)
+--Group - Singer(one-to-many)
+--Playlist - Track(one-to-many)
+--Genre - Track(many-to-many)
