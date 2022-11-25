@@ -30,7 +30,17 @@ INSERT INTO users(abstr_user_id, subscription_id) VALUES
 
 INSERT INTO logging(abstr_user_id, message) VALUES
 (3, 'Get a month subscription'),
-(5, 'Get a year subscription');
+(5, 'Get a year subscription'),
+(1, 'register as admin'),
+(2, 'register as artist'),
+(3, 'register as user'),
+(4, 'register as user'),
+(5, 'register as user'),
+(6, 'register as artist'),
+(7, 'register as artist'),
+(8, 'register as artist'),
+(9, 'register as artist'),
+(10, 'register as artist');
 
 INSERT INTO countries (title, iso) VALUES 
 ('Afghanistan', 'AF'), 

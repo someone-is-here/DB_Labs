@@ -2,15 +2,15 @@
 
 -- DROP DATABASE IF EXISTS "StreamingServiceDB";
 
-CREATE DATABASE "StreamingServiceDB"
-    WITH
-    OWNER = postgres
-    ENCODING = 'UTF8'
-    LC_COLLATE = 'English_Dominica.1251'
-    LC_CTYPE = 'English_Dominica.1251'
-    TABLESPACE = pg_default
-    CONNECTION LIMIT = -1
-    IS_TEMPLATE = False;
+-- CREATE DATABASE "StreamingServiceDB"
+--     WITH
+--     OWNER = postgres
+--     ENCODING = 'UTF8'
+--     LC_COLLATE = 'English_Dominica.1251'
+--     LC_CTYPE = 'English_Dominica.1251'
+--     TABLESPACE = pg_default
+--     CONNECTION LIMIT = -1
+--     IS_TEMPLATE = False;
 	
 CREATE EXTENSION pgcrypto;
 
@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS abstract_users(
 	id BIGSERIAL PRIMARY KEY,
 	role_id SMALLSERIAL,
 	login VARCHAR(100) NOT NULL UNIQUE,
-	email VARCHAR(256) NOT NULL UNIQUE,
+	email VARCHAR(256) NOT NULL UNIQUE CHECK (email ~* '^[A-Za-z0-9._+%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$'),
 	password TEXT NOT NULL,
 	CONSTRAINT fk_role FOREIGN KEY(role_id) REFERENCES roles(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
