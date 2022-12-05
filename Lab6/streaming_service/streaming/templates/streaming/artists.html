@@ -1,0 +1,15 @@
+{% extends 'streaming/base.html' %}
+
+{% block content %}
+{% for item in artists %}
+    <div class="album_container">
+        <h3>{{item.name}}</h3>
+        <div>
+          <h5>{{item.country_title}}</h5>
+          <hr>
+          <a href="{{item.website}}" class="site">{{item.website}}</a>
+          <span>Tour dates: {{item.tour_dates}}</span>
+        </div>
+    </div>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'streaming/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container_playlists">
+{% for item in playlists %}
+    <div>
+        <h3 class="playlist_title">{{item.name}}</h3>
+        <ul>
+        {% for track in item.tracks%}
+        <li>{{track.name}}</li>
+         {% endfor %}
+        </ul>
+    </div>
+{% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'streaming/base.html' %}
+{% load static %}
+
+{% block content %}
+{% for item in tracks %}
+    <div class="track_container">
+        <h3>{{item.name}}</h3>
+        <span>
+            <h5>{{item.timing|time:"g:i"|lower}}</h5>
+            <span class="text_container_span">
+            <img src="{% static 'streaming/images/like.jpg'%}" class="small_icon"/>
+            <span class="text_container_span">{{item.likes}}</span>
+            <img src="{% static 'streaming/images/play.jpg'%}" class="small_icon"/>
+            <span  class="text_container_span"> {{item.streaming}}</span>
+            </span>
+        </span>
+    </div>
+{% endfor %}
+{% endblock %}
