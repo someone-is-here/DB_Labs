@@ -4,7 +4,7 @@ function openNav() {
     closeNav()
   }else {
     document.getElementById("mySidenav").style.width = "250px";
-    document.body.style.backgroundColor = "rgba(0,0,0,0.9)";
+    document.body.style.backgroundColor = "rgba(0,0,0,0.8)";
   }
 }
 

@@ -74,7 +74,7 @@ WSGI_APPLICATION = 'streaming_service.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'StreamingServiceDB',
+        'NAME': 'StreamingServiceDBA',
         'USER': 'postgres',
         'PASSWORD': '28072002TaTa!',
         'HOST': 'localhost',
@@ -125,3 +125,5 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'streaming.AbstractUsers'

@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <title>{{title}}</title>
     <link type="text/css" href="{% static 'streaming/css/styles.css'%}" rel="stylesheet"/>
+     <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/4.2.7/mediaelementplayer.min.css" rel="stylesheet"/>
+  <link href="{% static 'streaming/css/track_styles.css' %}" rel="stylesheet"/>
 </head>
 <body>
 
@@ -12,8 +15,8 @@
 </header>
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="#">Login</a>
-  <a href="#">Register</a>
+  <a href="{% url 'login' %}">Login</a>
+  <a href="{% url 'register' %}">Register</a>
   <a href="#">Contact</a>
 </div>
 
@@ -22,7 +25,7 @@
 <div id="menu">
     <a href="{% url 'home'%}"> <img src="{% static 'streaming/images/icon.jpg'%}"></a>
     <ul>
-        {% for item in menu_items %}
+        {% for item in menu %}
         <a href="{% url item.url_name %}"><li>{{item.title}}</li></a>
             <br>
         {% endfor %}
@@ -38,5 +41,9 @@
 
 <footer></footer>
    <script src="{% static 'streaming/js/script.js'%}" ></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/4.2.7/mediaelement-and-player.min.js"></script>
+  <script src="{% static 'streaming/js/track_js.js' %}"></script>
+    <script src="{% static 'streaming/js/register.js' %}"></script>
 </body>
 </html>

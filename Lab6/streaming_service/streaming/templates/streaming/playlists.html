@@ -4,13 +4,15 @@
 {% block content %}
 <div class="container_playlists">
 {% for item in playlists %}
-    <div>
+    <div class="container_playlist">
         <h3 class="playlist_title">{{item.name}}</h3>
+        <a href="{% url 'selected_playlist' item.id %}"><img src="{% static 'streaming/images/playlist.jpg'%}" class="play_icon"  style="float:right;"/>
         <ul>
         {% for track in item.tracks%}
         <li>{{track.name}}</li>
          {% endfor %}
         </ul>
+
     </div>
 {% endfor %}
 </div>

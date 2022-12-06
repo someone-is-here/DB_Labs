@@ -7,7 +7,7 @@
   height: 100%; /* 100% Full-height */
   width: 0; /* 0 width - change this with JavaScript */
   position: fixed; /* Stay in place */
-  z-index: 1; /* Stay on top */
+  z-index: 5; /* Stay on top */
   top: 0; /* Stay at the top */
   right: 0;
   background: black; /* Black*/
@@ -63,7 +63,7 @@
   text-shadow: 1px 1px 1px red, 0 0 1em blue, 0 0 0.2em blue;
   height:100%;
 }
-#menu li::marker {
+li::marker {
     content: '';
 }
 a {
@@ -154,4 +154,48 @@ vertical-align: middle;
   text-shadow: 1px 1px 1px red, 0 0 1em blue, 0 0 0.2em blue;
   letter-spacing: 0.3em;
    font-size: 20px;
+}
+a{
+  color: blue;
+}
+.artist{
+   color: #c6b8e0;
+  text-shadow: 1px 1px 1px red, 0 0 1em blue, 0 0 0.2em blue;
+  letter-spacing: 0.15em;
+   font-size: 20px;
+}
+.container {
+    height:2em;
+}
+
+.container ul li {
+    margin-left:20px;
+    float: left;
+}
+
+.container ul {
+    display: block;
+}
+.track_container_item{
+  width:20em;
+  height:20em;
+  padding: 5px;
+  margin-left: 30%;
+  margin-top: 10%;
+  border-color: rebeccapurple;
+  box-shadow: 1px 1px 1px red, 0 0 1em blue, 0 0 0.2em blue;
+}
+.track_photo{
+  width:7em;
+  height:7em;
+}
+.play_icon{
+    width:10em;
+    height:10em;
+}
+.container_playlist{
+  width:20em;
+  height:20em;
+  overflow: hidden;
+
 }
