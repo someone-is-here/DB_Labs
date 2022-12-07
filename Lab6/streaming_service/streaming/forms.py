@@ -1,7 +1,8 @@
 from django.forms import ModelForm
 from django import forms
 
-from streaming.models import Tracks, Albums, AbstractUsers, Users, Artists
+from streaming.models import Tracks, Albums, AbstractUsers, Users, Artists, Playlists, PlaylistTrack, ArtistInstrument, \
+    ArtistLabel
 
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
@@ -50,12 +51,13 @@ class AlbumsForm(ModelForm):
 
 
 class UserCreationForm(ModelForm):
+    email = forms.CharField(widget=forms.EmailInput)
     password1 = forms.CharField(widget=forms.PasswordInput)
     password2 = forms.CharField(widget=forms.PasswordInput)
 
     class Meta:
         model = AbstractUsers
-        fields = ['username', 'login', 'email', 'role', 'password1', 'password2']
+        fields = ['login', 'email', 'role', 'password1', 'password2']
 
 
 class UserForm(ModelForm):
@@ -64,8 +66,31 @@ class UserForm(ModelForm):
         fields = ['subscription']
 
 
+class PlaylistForm(ModelForm):
+    class Meta:
+        model = Playlists
+        fields = ['name']
+
+
+class PlaylistTrackForm(ModelForm):
+    class Meta:
+        model = PlaylistTrack
+        fields = ['track']
+
+
 class ArtistForm(ModelForm):
     class Meta:
         model = Artists
         fields = ['name', 'website', 'tour_dates', 'country']
 
+
+class ArtistInstrumentForm(ModelForm):
+    class Meta:
+        model = ArtistInstrument
+        fields = ['instrument']
+
+
+class ArtistLabelForm(ModelForm):
+    class Meta:
+        model = ArtistLabel
+        fields = ['label']

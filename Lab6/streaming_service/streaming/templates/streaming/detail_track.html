@@ -26,11 +26,13 @@
 
        </div>
       </div>
+    {% if user.role.id != 3 and permission %}
                          <div style="text-align:center;">
                              <a href="{% url 'tracks' %}">Back</a>
                              <a href="{% url 'update_track' item.pk%}">Update</a>
                              <a href="{% url 'delete_track' item.pk%}">Delete</a>
                          </div>
+                         {% endif %}
     </div>
     </div>
 {% endblock %}

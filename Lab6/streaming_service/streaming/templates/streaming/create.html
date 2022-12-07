@@ -2,13 +2,14 @@
 {% load static %}
 
 {% block content %}
-  <h2 style="font-size:30px;">{{title}}</h2>
+<div class="delete">
         {% for error in error_messages %}
         <p style="color:white;font-size:26px;font-weight:bold;text-shadow:2px 2px 2px rgb(252, 3, 3);">{{error}}</p>
         {% endfor %}
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Submit">
+    <input type="submit" value="Submit" class="button-63">
 </form>
+</div>
 {% endblock %}
