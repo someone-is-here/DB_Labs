@@ -8,7 +8,7 @@ from django.views.generic.edit import CreateView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
 from streaming.forms import TracksForm, AlbumsForm, UserCreationForm, UserForm, ArtistForm, PlaylistForm, \
-    PlaylistTrackForm, ArtistInstrumentForm, ArtistLabelForm
+    PlaylistTrackForm, ArtistInstrumentForm, ArtistLabelForm, ArtistGenreForm
 from streaming.models import Albums, Tracks, Artists, Playlists, Labels, Instruments, Genres, AbstractUsers, Users, \
     PlaylistTrack
 from django.views.generic.edit import FormView
@@ -113,7 +113,7 @@ class PlaylistsListView(DataMixin, TemplateView):
 
 
 class TrackCreateView(DataMixin, LoginRequiredMixin, FormView):
-    login_url = 'login/'
+    login_url = '/login/'
     template_name = 'streaming/create.html'
     form_class = TracksForm
 
@@ -132,10 +132,11 @@ class TrackCreateView(DataMixin, LoginRequiredMixin, FormView):
         return reverse('tracks')
 
 
-class TrackDetailView(DataMixin, DetailView):
+class TrackDetailView(DataMixin, LoginRequiredMixin, DetailView):
     model = Tracks
     template_name = 'streaming/detail_track.html'
     pk_url_kwarg = 'track_id'
+    login_url = '/login/'
     context_object_name = 'item'
 
     def get_context_data(self, **kwargs):
@@ -152,7 +153,7 @@ class TrackDetailView(DataMixin, DetailView):
                        [self.kwargs['track_id']])
         res = cursor.fetchone()
 
-        if res and res[0] == self.request.user.id:
+        if (res and res[0] == self.request.user.id) or self.request.user.role.id == 1:
             context['permission'] = True
         else:
             context['permission'] = False
@@ -161,7 +162,7 @@ class TrackDetailView(DataMixin, DetailView):
 
 
 class TrackUpdateView(DataMixin, LoginRequiredMixin, UpdateView):
-    login_url = 'login/'
+    login_url = '/login/'
     model = Tracks
     pk_url_kwarg = 'track_id'
     fields = ['name', 'timing', 'storage_path', 'track', 'photo', 'album']
@@ -178,7 +179,7 @@ class TrackUpdateView(DataMixin, LoginRequiredMixin, UpdateView):
 
 class TrackDeleteView(DataMixin, LoginRequiredMixin, DeleteView):
     model = Tracks
-    login_url = 'login/'
+    login_url = '/login/'
     pk_url_kwarg = 'track_id'
     template_name = 'streaming/delete.html'
     success_url = reverse_lazy('tracks')
@@ -192,7 +193,7 @@ class TrackDeleteView(DataMixin, LoginRequiredMixin, DeleteView):
 
 
 class AlbumCreateView(DataMixin, LoginRequiredMixin, FormView):
-    login_url = 'login/'
+    login_url = '/login/'
     template_name = 'streaming/create.html'
     form_class = AlbumsForm
 
@@ -209,11 +210,12 @@ class AlbumCreateView(DataMixin, LoginRequiredMixin, FormView):
         return reverse('albums')
 
 
-class AlbumDetailView(DataMixin, DetailView):
+class AlbumDetailView(DataMixin, LoginRequiredMixin, DetailView):
     model = Albums
     template_name = 'streaming/detail_album.html'
     pk_url_kwarg = 'album_id'
     context_object_name = 'item'
+    login_url = '/login/'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -228,7 +230,8 @@ class AlbumDetailView(DataMixin, DetailView):
                        [self.kwargs['album_id']])
         res = cursor.fetchone()
         print(res, self.request.user.id)
-        if res and res[0] == self.request.user.id:
+
+        if (res and res[0] == self.request.user.id) or self.request.user.role.id == 1:
             context['permission'] = True
         else:
             context['permission'] = False
@@ -238,7 +241,7 @@ class AlbumDetailView(DataMixin, DetailView):
 
 class AlbumUpdateView(DataMixin, LoginRequiredMixin, UpdateView):
     model = Albums
-    login_url = 'login/'
+    login_url = '/login/'
     pk_url_kwarg = 'album_id'
     fields = ['name', 'release_date', 'icon']
     template_name = 'streaming/create.html'
@@ -254,7 +257,7 @@ class AlbumUpdateView(DataMixin, LoginRequiredMixin, UpdateView):
 
 class AlbumDeleteView(DataMixin, LoginRequiredMixin, DeleteView):
     model = Albums
-    login_url = 'login/'
+    login_url = '/login/'
     pk_url_kwarg = 'album_id'
     template_name = 'streaming/delete.html'
     success_url = reverse_lazy('albums')
@@ -269,7 +272,7 @@ class AlbumDeleteView(DataMixin, LoginRequiredMixin, DeleteView):
 
 class PlaylistListView(DataMixin, LoginRequiredMixin, DetailView):
     model = Playlists
-    login_url = 'login/'
+    login_url = '/login/'
     template_name = 'streaming/tracks.html'
     pk_url_kwarg = 'playlist_id'
     context_object_name = 'item'
@@ -388,7 +391,7 @@ class SubscriptionUpdateView(DataMixin, LoginRequiredMixin, UpdateView):
     fields = ['subscription']
     template_name = 'streaming/create.html'
     success_url = reverse_lazy('home',)
-    login_url = 'login/'
+    login_url = '/login/'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -398,7 +401,7 @@ class SubscriptionUpdateView(DataMixin, LoginRequiredMixin, UpdateView):
 
 
 class PlaylistCreateView(DataMixin, LoginRequiredMixin, FormView):
-    login_url = 'login/'
+    login_url = '/login/'
     template_name = 'streaming/create.html'
     form_class = PlaylistForm
 
@@ -418,7 +421,7 @@ class PlaylistCreateView(DataMixin, LoginRequiredMixin, FormView):
 
 
 class PlaylistAddTrackView(DataMixin, LoginRequiredMixin, TemplateView):
-    login_url = 'login/'
+    login_url = '/login/'
     template_name = 'streaming/create.html'
     pk_url_kwarg = 'playlist_id'
     fields = ['track']
@@ -457,7 +460,7 @@ class PlaylistAddTrackView(DataMixin, LoginRequiredMixin, TemplateView):
 
 
 class PlaylistRemoveTrackView(DataMixin, LoginRequiredMixin, TemplateView):
-    login_url = 'login/'
+    login_url = '/login/'
     template_name = 'streaming/delete.html'
     pk_url_kwarg = ('playlist_id', 'track_id')
     model = PlaylistTrack
@@ -482,7 +485,7 @@ class PlaylistRemoveTrackView(DataMixin, LoginRequiredMixin, TemplateView):
 
 
 class ArtistsAddInstrumentView(DataMixin, LoginRequiredMixin, TemplateView):
-    login_url = 'login/'
+    login_url = '/login/'
     template_name = 'streaming/create.html'
     pk_url_kwarg = 'abstr_user_id'
     model = PlaylistTrack
@@ -524,7 +527,7 @@ class ArtistsAddInstrumentView(DataMixin, LoginRequiredMixin, TemplateView):
 
 
 class ArtistsAddLabelView(DataMixin, LoginRequiredMixin, TemplateView):
-    login_url = 'login/'
+    login_url = '/login/'
     template_name = 'streaming/create.html'
     pk_url_kwarg = 'abstr_user_id'
     model = PlaylistTrack
@@ -563,5 +566,48 @@ class ArtistsAddLabelView(DataMixin, LoginRequiredMixin, TemplateView):
                        [self.kwargs['abstr_user_id'],
                         request.POST[
                             'form_pre-label']])
+        return HttpResponseRedirect(reverse('artists'))
+
+
+class ArtistsAddGenreView(DataMixin, LoginRequiredMixin, TemplateView):
+    login_url = '/login/'
+    template_name = 'streaming/create.html'
+    pk_url_kwarg = 'abstr_user_id'
+    model = PlaylistTrack
+    success_url = reverse_lazy('artists')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        additional_context = self.get_user_context(title='genre', request=self.request)
+        print(self.kwargs)
+        return dict(list(context.items()) + list(additional_context.items()))
+
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data()
+
+        context['form'] = ArtistGenreForm(prefix='form_pre')
+
+        self.my_context = context
+
+        return self.render_to_response(context=self.my_context)
+
+    def post(self, request, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        additional_context = self.get_user_context(request=self.request)
+        context['form'] = ArtistGenreForm(prefix='form_pre')
+        context = dict(list(context.items()) + list(additional_context.items()))
+
+        cursor = connections['default'].cursor()
+        cursor.execute('SELECT artist_id, genre_id FROM artist_genre WHERE artist_id=%s AND genre_id=%s',
+                       [self.kwargs['abstr_user_id'], request.POST['form_pre-genre']])
+
+        if cursor.fetchone():
+            context['error_messages'] = ['Current genre already exists', ]
+            print("error", context)
+            return self.render_to_response(context=context)
+        cursor.execute('INSERT INTO artist_genre(artist_id, genre_id) VALUES (%s, %s)',
+                       [self.kwargs['abstr_user_id'],
+                        request.POST[
+                            'form_pre-genre']])
         return HttpResponseRedirect(reverse('artists'))
 

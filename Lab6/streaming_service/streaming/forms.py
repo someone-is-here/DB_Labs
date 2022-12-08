@@ -2,7 +2,7 @@ from django.forms import ModelForm
 from django import forms
 
 from streaming.models import Tracks, Albums, AbstractUsers, Users, Artists, Playlists, PlaylistTrack, ArtistInstrument, \
-    ArtistLabel
+    ArtistLabel, ArtistGenre
 
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
@@ -94,3 +94,9 @@ class ArtistLabelForm(ModelForm):
     class Meta:
         model = ArtistLabel
         fields = ['label']
+
+
+class ArtistGenreForm(ModelForm):
+    class Meta:
+        model = ArtistGenre
+        fields = ['genre']

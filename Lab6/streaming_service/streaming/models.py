@@ -117,14 +117,6 @@ class Albums(models.Model):
         return self.name
 
 
-# class GroupAbstractUser(models.Model):
-#     groups = models.ForeignKey(Group, on_delete=models.CASCADE)
-#     abstract_user = models.ForeignKey(AbstractUsers, on_delete=models.CASCADE)
-#
-#     class Meta:
-#         db_table = 'abstract_users_groups'
-
-
 class ArtistAlbum(models.Model):
     artist = models.OneToOneField('Artists', models.DO_NOTHING)
     album = models.ForeignKey(Albums, models.DO_NOTHING)

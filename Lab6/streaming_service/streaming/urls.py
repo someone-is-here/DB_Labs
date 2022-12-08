@@ -3,7 +3,8 @@ from django.urls import path
 from streaming.views import Home, AlbumsListView, TracksListView, ArtistsListView, PlaylistsListView, TrackCreateView, \
     AlbumCreateView, TrackDetailView, AlbumDetailView, TrackUpdateView, TrackDeleteView, AlbumUpdateView, \
     AlbumDeleteView, PlaylistListView, RegisterAbstractUser, LoginUser, logout_user, SubscriptionUpdateView, \
-    PlaylistCreateView, PlaylistAddTrackView, PlaylistRemoveTrackView, ArtistsAddInstrumentView, ArtistsAddLabelView
+    PlaylistCreateView, PlaylistAddTrackView, PlaylistRemoveTrackView, ArtistsAddInstrumentView, ArtistsAddLabelView, \
+    ArtistsAddGenreView
 
 urlpatterns = [
     path('', Home.as_view(), name='home'),
@@ -29,5 +30,6 @@ urlpatterns = [
     path('albums/', AlbumsListView.as_view(), name='albums'),
     path('artists/', ArtistsListView.as_view(), name='artists'),
     path('artists/<int:abstr_user_id>/add_instrument', ArtistsAddInstrumentView.as_view(), name='add_instrument'),
+    path('artists/<int:abstr_user_id>/add_genre', ArtistsAddGenreView.as_view(), name='add_genre'),
     path('artists/<int:abstr_user_id>/add_label', ArtistsAddLabelView.as_view(), name='add_label'),
 ]
