@@ -39,8 +39,8 @@ select:hover {
   font-family: Phantomsans, sans-serif;
   font-size: 18px;
   line-height: 1em;
-  max-width: 10em;
-  min-width: 7em;
+  max-width: 21em;
+  min-width: 20em;
   padding: 0.5em;
  }
 

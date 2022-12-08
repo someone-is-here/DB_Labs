@@ -21,7 +21,7 @@ CREATE OR REPLACE FUNCTION process_abstract_user() RETURNS TRIGGER AS $logging$
             INSERT INTO logging SELECT 'I', now(), 'Insert abstract_user', NEW.id, NEW.login, roles.role from roles WHERE roles.id=NEW.role_id;
             RETURN NEW;
         END IF;
-        RETURN NULL; -- возвращаемое значение для триггера AFTER игнорируется
+        RETURN NULL;
     END;
 $logging$ LANGUAGE plpgsql;
 
@@ -48,7 +48,7 @@ CREATE OR REPLACE FUNCTION process_user() RETURNS TRIGGER AS $logging$
 			RETURN NEW;
 			
         END IF;
-        RETURN NULL; -- возвращаемое значение для триггера AFTER игнорируется
+        RETURN NULL;
     END;
 $logging$ LANGUAGE plpgsql;
 
@@ -79,7 +79,7 @@ CREATE OR REPLACE FUNCTION process_artist_instruments() RETURNS TRIGGER AS $logg
 			RETURN NEW;
 			
         END IF;
-        RETURN NULL; -- возвращаемое значение для триггера AFTER игнорируется
+        RETURN NULL;
     END;
 $logging$ LANGUAGE plpgsql;
 
@@ -109,7 +109,7 @@ CREATE OR REPLACE FUNCTION process_artist_label() RETURNS TRIGGER AS $logging$
 			RETURN NEW;
 			
         END IF;
-        RETURN NULL; -- возвращаемое значение для триггера AFTER игнорируется
+        RETURN NULL;
     END;
 $logging$ LANGUAGE plpgsql;
 
@@ -140,7 +140,7 @@ CREATE OR REPLACE FUNCTION process_artist_genre() RETURNS TRIGGER AS $logging$
 			RETURN NEW;
 			
         END IF;
-        RETURN NULL; -- возвращаемое значение для триггера AFTER игнорируется
+        RETURN NULL;
     END;
 $logging$ LANGUAGE plpgsql;
 
@@ -173,7 +173,7 @@ CREATE OR REPLACE FUNCTION process_artist_track() RETURNS TRIGGER AS $logging$
 			AND artists.id=abstract_users.id;
 			RETURN NEW;
         END IF;
-        RETURN NULL; -- возвращаемое значение для триггера AFTER игнорируется
+        RETURN NULL;
     END;
 $logging$ LANGUAGE plpgsql;
 
@@ -203,7 +203,7 @@ CREATE OR REPLACE FUNCTION process_abstract_user_playlist() RETURNS TRIGGER AS $
 			RETURN NEW;
 			
         END IF;
-        RETURN NULL; -- возвращаемое значение для триггера AFTER игнорируется
+        RETURN NULL;
     END;
 $logging$ LANGUAGE plpgsql;
 
@@ -240,7 +240,7 @@ CREATE OR REPLACE FUNCTION process_playlist_track() RETURNS TRIGGER AS $logging$
 			RETURN NEW;
 			
         END IF;
-        RETURN NULL; -- возвращаемое значение для триггера AFTER игнорируется
+        RETURN NULL;
     END;
 $logging$ LANGUAGE plpgsql;
 

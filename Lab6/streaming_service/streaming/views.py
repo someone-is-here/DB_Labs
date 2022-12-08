@@ -203,6 +203,13 @@ class AlbumCreateView(DataMixin, LoginRequiredMixin, FormView):
         return self.render_to_response(context=context)
 
     def form_valid(self, form):
+        if int(form.data['release_date']) < 0 or datetime.now().year > int(form.data['release_date']):
+            context = self.get_context_data(title='album', request=self.request)
+            context['form'] = form
+            context['error_messages'] = []
+            context['error_messages'].append('Year doesn''t validate year constraints')
+            return self.render_to_response(context=context)
+
         form.save()
         return super().form_valid(form)
 
@@ -253,6 +260,16 @@ class AlbumUpdateView(DataMixin, LoginRequiredMixin, UpdateView):
         additional_context = self.get_user_context(title='album', request=self.request)
 
         return dict(list(context.items()) + list(additional_context.items()))
+
+    def form_valid(self, form):
+        if int(form.data['release_date']) < 0 or int(form.data['release_date']) > datetime.now().year:
+            context = self.get_context_data(title='album', request=self.request)
+            context['form'] = form
+            context['error_messages'] = []
+            context['error_messages'].append('Year doesn''t validate year constraints')
+            return self.render_to_response(context=context)
+        form.save()
+        return super().form_valid(form)
 
 
 class AlbumDeleteView(DataMixin, LoginRequiredMixin, DeleteView):
