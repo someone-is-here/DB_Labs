@@ -17,11 +17,11 @@
             <span  class="text_container_span"> {{item.streaming}}</span>
             </span>
         </span>
-                     <div class="container">
-      <div class="music-player">
-        <div class="lecteur">
-        <audio class="fc-media" style="width: 100%;">
-         <source src="{% if item.track %}{{item.track.url}} {% else %} {{item.audio_link}} {% endif %}" type="audio/mp3"/>
+        <div class="container">
+            <div class="music-player">
+            <div class="lecteur">
+            <audio class="fc-media" style="width: 100%;">
+            <source src="{% if item.track %}{{item.track.url}} {% else %} {{item.audio_link}} {% endif %}" type="audio/mp3"/>
         </audio>
 
        </div>
